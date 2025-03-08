@@ -13,7 +13,7 @@
 
 - **前端**: Next.js, React, TailwindCSS
 - **后端**: Next.js API Routes
-- **数据库**: PostgreSQL (Supabase)
+- **数据库**: PostgreSQL (Zeabur)
 - **ORM**: Prisma
 
 ## 开始使用
@@ -21,7 +21,7 @@
 ### 前提条件
 
 - Node.js 18+
-- Supabase账户 (免费)
+- PostgreSQL数据库 (如Zeabur提供的)
 
 ### 安装
 
@@ -38,28 +38,21 @@ cd aimaker-waitlist
 npm install
 ```
 
-3. 设置Supabase数据库
+3. 配置环境变量
 
-   - 注册并登录 [Supabase](https://supabase.com/)
-   - 创建一个新项目
-   - 在项目设置中找到数据库连接信息
-   - 复制PostgreSQL连接字符串
-
-4. 配置环境变量
-
-编辑`.env`文件，粘贴您的Supabase PostgreSQL连接字符串：
+编辑`.env`文件，设置您的PostgreSQL数据库连接字符串：
 
 ```
-DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
+DATABASE_URL="postgresql://username:password@host:port/database"
 ```
 
-5. 创建数据库表
+4. 创建数据库表
 
 ```bash
 npx prisma migrate dev --name init
 ```
 
-6. 启动开发服务器
+5. 启动开发服务器
 
 ```bash
 npm run dev
@@ -77,6 +70,8 @@ npm run dev
 2. 在Vercel中导入项目
 3. 在环境变量设置中添加`DATABASE_URL`
 4. 部署项目
+
+> **注意**: 在Vercel上部署时，构建脚本已配置为自动运行`prisma generate`命令，以确保Prisma客户端正确生成。
 
 ## 数据库迁移
 
